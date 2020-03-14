@@ -8,3 +8,11 @@ class Piece(ABC):
     @abstractmethod
     def move(self, pos_from, pos_to):
         pass
+
+    @property
+    @abstractmethod
+    def str_rep(self):
+        pass
+
+    def __str__(self):
+        return self.str_rep
