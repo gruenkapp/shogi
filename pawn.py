@@ -1,5 +1,3 @@
-import numpy as np
-
 from piece import Piece
 
 
@@ -7,12 +5,9 @@ class Pawn(Piece):
     """
     A Pawn can move only 1 position forward.
     """
+    _moves = [[1, 0]]
     str_rep = "P"
+    error_msg = "Pawns can only move 1 step forward"
 
-    moves = [np.array(l) for l in [[1, 0]]]
-
-    def move(self, pos_from, pos_to):
-        if np.any([np.array_equal(pos_to, pos) for pos in [pos_from - m for m in self.moves]]):
-            return 0
-        else:
-            raise ValueError("Pawns can only move 1 step forward")
+    def __init__(self):
+        super().__init__()
