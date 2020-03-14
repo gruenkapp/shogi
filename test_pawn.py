@@ -1,12 +1,14 @@
+import numpy as np
+
 from board import Board
 
 board = Board()
 board.draw()
 n = 6
 while True: # not n == 0:
-    init = (n, 4)
+    init = np.array([n, 4])
     n -= 1
-    targ = (n, 4)
+    targ = np.array([n, 4])
 
     print("From (row, col)")
     print(init)

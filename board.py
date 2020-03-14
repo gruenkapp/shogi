@@ -34,8 +34,8 @@ class Board(object):
         row1, col1 = pos_from
         row2, col2 = pos_to
 
-        if row2 > self.DIM or col2 > self.DIM or row2 < 0 or col2 < 0:
-            raise ValueError("Out of Board: the board's dimensions are " + str(self.DIM) + "x" + str(self.DIM) +
+        if np.any(pos_to > self.DIM) or np.any(pos_to < 0):
+            raise ValueError("Out of the Board: the board's dimensions are " + str(self.DIM) + "x" + str(self.DIM) +
                              ". You cannot move a piece beyond the board's edge.")
         piece = self.board.at[row1, col1]
         if piece == "":
