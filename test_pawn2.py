@@ -20,8 +20,9 @@ class TestBoard(unittest.TestCase):
                 targ = np.array([n, 4])
                 self.board.move(init, targ)
         exception = cm.exception
-        self.assertEqual(str(exception),
-                    "Out of Board: the board's dimensions are 9x9. You cannot move a piece beyond the board's edge.")
+        self.assertEqual(str(exception), "Out of the Board: the board's dimensions are "
+                         + str(self.board.DIM) + "x" + str(self.board.DIM) +
+                         ". You cannot move a piece beyond the board's edge.")
 
     def tearDown(self):
         pass
