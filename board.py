@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from pawn import Pawn
+from pieces import Pawn, King
 
 
 class Board(object):
@@ -11,10 +11,12 @@ class Board(object):
     The board contains a list of pieces and knows the position of each piece.
     """
     DIM = 9
+    EMPTY_CELL = "   "
 
     def __init__(self):
-        self.board = pd.DataFrame("   ", index=range(self.DIM), columns=range(self.DIM))
+        self.board = pd.DataFrame(self.EMPTY_CELL, index=range(self.DIM), columns=range(self.DIM))
         self.board.at[6, 4] = Pawn(color='black')
+        self.board.at[8, 4] = King(color='black')
         self.board.at[2, 3] = Pawn(color='white')
 
     def move(self, pos_from, pos_to):
@@ -38,9 +40,18 @@ class Board(object):
         if np.any(pos_to > self.DIM) or np.any(pos_to < 0):
             raise ValueError("Out of the Board: the board's dimensions are " + str(self.DIM) + "x" + str(self.DIM) +
                              ". You cannot move a piece beyond the board's edge.")
+
         piece = self.board.at[row1, col1]
-        if piece == "":
+        if piece == self.EMPTY_CELL:
             raise ValueError("No Piece at start position: there is no piece at " + str(pos_from))
+
+        piece_at_target = self.board.at[row2, col2]
+        if piece_at_target != self.EMPTY_CELL:
+            if piece_at_target.color == piece.color:
+                raise ValueError("Target position contains a friend piece.")
+            # else:
+                # implement piece capture
+
         if piece.move(pos_from, pos_to) == 0:
             self.board.at[row1, col1] = ""
             self.board.at[row2, col2] = piece

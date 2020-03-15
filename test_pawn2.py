@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 
 from board import Board
-from pawn import Pawn
+from pieces import Pawn
 
 
 class TestPawn(unittest.TestCase):
@@ -12,6 +12,16 @@ class TestPawn(unittest.TestCase):
     def setUp(self):
         # Empty board with 1 Pawn in (6,4)
         self.board = Board()
+
+    def test_piece_crash(self):
+        init = np.array([8, 4])
+        targ = np.array([7, 4])
+        self.board.move(init, targ)
+        init = np.array([7, 4])
+        targ = np.array([6, 4])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
 
     def test_pawn_movement(self):
         init = np.array([6, 4])

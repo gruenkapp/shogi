@@ -18,6 +18,7 @@ class Piece(ABC):
         else:
             raise ValueError("Pieces can only be 'white' or 'black'")
 
+
     @property
     @abstractmethod
     def _str_rep(self):
