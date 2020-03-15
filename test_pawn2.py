@@ -6,6 +6,7 @@ import numpy as np
 from board import Board
 from pawn import Pawn
 
+
 class TestPawn(unittest.TestCase):
 
     def setUp(self):
@@ -21,7 +22,7 @@ class TestPawn(unittest.TestCase):
 
     def test_invalid_pawn_movement_large_step(self):
         init = np.array([6, 4])
-        targ = np.array([5, 4])
+        targ = np.array([4, 4])
         with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
             # Tries to move to the invalid position
             self.board.move(init, targ)
