@@ -1,6 +1,9 @@
+import logging
+
 import pandas as pd
 import numpy as np
 
+from piece import Piece
 from pieces import Pawn, King
 
 
@@ -14,10 +17,14 @@ class Board(object):
     EMPTY_CELL = "   "
 
     def __init__(self):
+        self.captured = {
+            Piece.colors['BLACK']: [],
+            Piece.colors['WHITE']: []
+        }
         self.board = pd.DataFrame(self.EMPTY_CELL, index=range(self.DIM), columns=range(self.DIM))
-        self.board.at[6, 4] = Pawn(color='black')
-        self.board.at[8, 4] = King(color='black')
-        self.board.at[2, 3] = Pawn(color='white')
+        self.board.at[6, 4] = Pawn(color=Piece.colors['BLACK'])
+        self.board.at[8, 4] = King(color=Piece.colors['BLACK'])
+        self.board.at[2, 3] = Pawn(color=Piece.colors['WHITE'])
 
     def move(self, pos_from, pos_to):
         """
@@ -49,13 +56,19 @@ class Board(object):
         if piece_at_target != self.EMPTY_CELL:
             if piece_at_target.color == piece.color:
                 raise ValueError("Target position contains a friend piece.")
-            # else:
-                # implement piece capture
+            else:
+                logging.debug(str(piece) + " captured piece " + str(piece_at_target) + " color " + piece_at_target.color
+                              + " on position " + str(pos_to))
+                self.captured[piece_at_target.color] += [piece_at_target]
 
         if piece.move(pos_from, pos_to) == 0:
-            self.board.at[row1, col1] = ""
+            self.board.at[row1, col1] = self.EMPTY_CELL
             self.board.at[row2, col2] = piece
         self.draw()
 
     def draw(self):
+        print("Captured:")
+        print(', '.join([str(p) for p in self.captured[Piece.colors['WHITE']]]))
         print(self.board)
+        print("Captured:")
+        print(', '.join([str(p) for p in self.captured[Piece.colors['BLACK']]]))
