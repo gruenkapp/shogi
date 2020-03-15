@@ -13,8 +13,9 @@ class Board(object):
     DIM = 9
 
     def __init__(self):
-        self.board = pd.DataFrame("", index=range(self.DIM), columns=range(self.DIM))
-        self.board.at[6, 4] = Pawn()
+        self.board = pd.DataFrame("   ", index=range(self.DIM), columns=range(self.DIM))
+        self.board.at[6, 4] = Pawn(color='black')
+        self.board.at[2, 3] = Pawn(color='white')
 
     def move(self, pos_from, pos_to):
         """
@@ -28,7 +29,7 @@ class Board(object):
         :param pos_from: initial position. This position must contain a piece.
         :param pos_to: target position. This position must be within the board and it must be the result of a movement
         that is legal for the piece that you are moving.
-        :return:
+        :return: nothing. If everything was ok, it will draw its new status. Otherwise it will throw an error.
         """
 
         row1, col1 = pos_from
