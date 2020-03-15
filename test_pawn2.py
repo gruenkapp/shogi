@@ -21,7 +21,7 @@ class TestPawn(unittest.TestCase):
 
     def test_invalid_pawn_movement_large_step(self):
         init = np.array([6, 4])
-        targ = np.array([4, 4])
+        targ = np.array([5, 4])
         with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
             # Tries to move to the invalid position
             self.board.move(init, targ)
@@ -32,6 +32,30 @@ class TestPawn(unittest.TestCase):
         with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
             # Tries to move to the invalid position
             self.board.move(init, targ)
+
+    def test_pawn_BnW(self):
+        n_black = 6
+        n_white = 2
+        while not n_black == 0:
+            # Move black pawn
+            init_black = np.array([n_black, 4])
+            n_black -= 1
+            targ_black = np.array([n_black, 4])
+            self.board.move(init_black, targ_black)
+
+            # Move white pawn
+            init_white = np.array([n_white, 3])
+            n_white += 1
+            targ_white = np.array([n_white, 3])
+            self.board.move(init_white, targ_white)
+
+        # Assert pawns at position
+        self.assertIsInstance(self.board.board.at[0, 4], Pawn)
+        self.assertIsInstance(self.board.board.at[8, 3], Pawn)
+
+        # Assert pawns color
+        self.assertEqual(str(self.board.board.at[0, 4]), Pawn._str_rep + '^')
+        self.assertEqual(str(self.board.board.at[8, 3]), Pawn._str_rep + 'v')
 
     def tearDown(self):
         pass
