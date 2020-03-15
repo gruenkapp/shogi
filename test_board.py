@@ -5,7 +5,7 @@ import numpy as np
 
 from board import Board
 
-from pawn import Pawn
+from pieces import Pawn
 
 class TestBoard(unittest.TestCase):
 
@@ -42,5 +42,3 @@ if __name__ == '__main__':
 
 # python -m unittest
 
-b = Board()
-b.draw()
