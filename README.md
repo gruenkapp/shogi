@@ -64,6 +64,8 @@ These functionalities are not yet developed:
 * Drops (see https://en.wikipedia.org/wiki/Shogi#Drops)
 * Check and checkmate (see https://en.wikipedia.org/wiki/Shogi#Check)
 
+Also, the interface could be improved: it could become a graphic interface, and/or allow for user's input. However, this would be more a development on top of this package.
+
 Also, see the issues that don't have any related pull request in this repo.
 
 Have fun! :)
