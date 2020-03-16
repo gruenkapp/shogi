@@ -1,6 +1,6 @@
 from itertools import product
 
-from piece import Piece, OneStepPiece, RangePiece
+from shogi.piece import Piece, OneStepPiece, RangePiece
 
 
 class Pawn(OneStepPiece):
@@ -86,7 +86,7 @@ class Knight(OneStepPiece):
     A Knight General jumps to the position that is two squares forward and one square to the side
     """
     _moves = [[2, -1], [2, 1]]
-    _str_rep = "S"
+    _str_rep = "N"
     _error_msg = "Illegal Move: a Knigt can only jump wo squares forward and one square to the side"
 
     def __init__(self, color):

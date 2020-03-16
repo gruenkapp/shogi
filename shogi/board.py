@@ -3,8 +3,8 @@ import logging
 import pandas as pd
 import numpy as np
 
-from piece import Piece
-from pieces import Pawn, King, Bishop, Rook, Lance, Knight, GoldGeneral, SilverGeneral
+from shogi.piece import Piece
+from shogi.pieces import Pawn, King, Bishop, Rook, Lance, Knight, GoldGeneral, SilverGeneral
 
 
 class Board(object):

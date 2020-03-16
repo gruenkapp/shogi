@@ -3,9 +3,10 @@ import unittest
 
 import numpy as np
 
-from board import Board
+from shogi.board import Board
 
-from pieces import Pawn
+from shogi.pieces import Pawn
+
 
 class TestBoard(unittest.TestCase):
 

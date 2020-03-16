@@ -1,7 +1,8 @@
 # Test suite containing all the TestCases.
 
-from test_board import TestBoard
-from test_pieces import TestPieces
+from .test_board import TestBoard
+from .test_pieces import TestPieces
+
 
 def suite():
     suite = unittest.TestSuite()

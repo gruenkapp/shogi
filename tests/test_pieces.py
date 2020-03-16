@@ -3,8 +3,8 @@ import logging
 
 import numpy as np
 
-from board import Board
-from pieces import Pawn, King, Bishop, Rook, Lance
+from shogi.board import Board
+from shogi.pieces import Pawn, King, Bishop, Rook, Lance
 
 logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 

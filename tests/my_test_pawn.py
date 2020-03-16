@@ -1,6 +1,6 @@
 import numpy as np
 
-from board import Board
+from shogi.board import Board
 
 board = Board()
 board.draw()

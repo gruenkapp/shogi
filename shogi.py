@@ -2,7 +2,7 @@ import time
 
 import numpy as np
 
-from board import Board
+from shogi import Board
 
 game = [
     [[6, 2], [5, 2]],
