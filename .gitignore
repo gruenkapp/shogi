@@ -1,6 +1,9 @@
 # Byte-compiled / optimized
 *.py[cod]
 
+# Test outputs
+*.out
+
 # Environment
 venv/
 

@@ -133,7 +133,7 @@ class Board(object):
             if piece_at_target.color == piece.color:
                 raise ValueError("Target position contains a friend piece.")
             else:
-                logging.debug(str(piece) + " captured piece " + str(piece_at_target) + " color " + piece_at_target.color
+                print(str(piece) + " captured piece " + str(piece_at_target) + " color " + piece_at_target.color
                               + " on position " + str(pos_to))
                 self.captured[piece.color] += [piece_at_target]
 
@@ -141,16 +141,15 @@ class Board(object):
         for pos in mv_range[:-1]:
             if self._get(pos) != self.EMPTY_CELL:
                 raise ValueError("Illegal move: you cannot jump over other pieces")
-        # TODO: mv_range to be used to make sure no piece is on the way
         self._set(pos_from, self.EMPTY_CELL)
         self._set(pos_to, piece)
         self.draw()
 
     def draw(self):
+        print("================ White (v) =====================")
         print("Captured:")
         print(', '.join([str(p) for p in self.captured[Piece.colors['WHITE']]]))
         print(self.board)
         print("Captured:")
         print(', '.join([str(p) for p in self.captured[Piece.colors['BLACK']]]))
-        print()
-        print("=======================================================")
+        print("================ Black (^) =====================")
