@@ -48,7 +48,7 @@ class Bishop(RangePiece):
     def can_move(self, pos_from, pos_to):
         diff = pos_to - pos_from
         r, c = diff
-        return r == c or r == -1 * c
+        return abs(r) == abs(c)
 
 
 class Rook(RangePiece):
@@ -71,7 +71,7 @@ class Lance(RangePiece):
     """
     A Lance can move any number of squares forward
     """
-    _str_rep = "R"
+    _str_rep = "L"
     _error_msg = "Illegal Move: A Lance can move any number of squares forward"
 
     def __init__(self, color):

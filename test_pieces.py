@@ -40,14 +40,14 @@ class TestPieces(unittest.TestCase):
     def test_rook(self):
         ## 1. Move across the board
         init = np.array([7, 7])
-        targ = np.array([7, 2])
+        targ = np.array([2, 7])
         self.board.move(init, targ)
         # Retrieve the element at (7, 2) and check whether it is a Bishop object
         self.assertIsInstance(self.board.board.at[7, 2], Rook, msg="Rook not in position")
 
         ## 2. Illegal move
-        init = np.array([7, 2])
-        targ = np.array([6, 1])
+        init = np.array([2, 7])
+        targ = np.array([2, 6])
         with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
             # Tries to move to the invalid position
             self.board.move(init, targ)

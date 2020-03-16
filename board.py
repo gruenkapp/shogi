@@ -21,13 +21,86 @@ class Board(object):
             Piece.colors['BLACK']: [],
             Piece.colors['WHITE']: []
         }
-        self.board = pd.DataFrame(self.EMPTY_CELL, index=range(self.DIM), columns=range(self.DIM))
-        self.board.at[6, 4] = Pawn(color=Piece.colors['BLACK'])
-        self.board.at[8, 4] = King(color=Piece.colors['BLACK'])
-        self.board.at[7, 1] = Bishop(color=Piece.colors['BLACK'])
-        self.board.at[7, 7] = Rook(color=Piece.colors['BLACK'])
-        self.board.at[8, 0] = Lance(color=Piece.colors['BLACK'])
-        self.board.at[2, 3] = Pawn(color=Piece.colors['WHITE'])
+        setup_white = [
+            [  # Rank 0
+                    Lance(color=Piece.colors['WHITE']),
+                    self.EMPTY_CELL,
+                    self.EMPTY_CELL,
+                    self.EMPTY_CELL,
+                    King(color=Piece.colors['WHITE']),
+                    self.EMPTY_CELL,
+                    self.EMPTY_CELL,
+                    self.EMPTY_CELL,
+                    Lance(color=Piece.colors['WHITE'])
+            ],
+            [  # Rank 1
+                self.EMPTY_CELL,
+                Bishop(color=Piece.colors['WHITE']),
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                Rook(color=Piece.colors['WHITE']),
+                self.EMPTY_CELL
+            ],
+            [  # Rank 2
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE']),
+                Pawn(color=Piece.colors['WHITE'])
+            ]
+        ]
+        setup_black = [
+            [  # Rank 6
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK']),
+                Pawn(color=Piece.colors['BLACK'])
+            ],
+            [  # Rank 7
+                self.EMPTY_CELL,
+                Bishop(color=Piece.colors['BLACK']),
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                Rook(color=Piece.colors['BLACK']),
+                self.EMPTY_CELL
+            ],
+            [  # Rank 8
+                Lance(color=Piece.colors['BLACK']),
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                King(color=Piece.colors['BLACK']),
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                self.EMPTY_CELL,
+                Lance(color=Piece.colors['BLACK'])
+            ]
+        ]
+        empty_ranks = [[self.EMPTY_CELL] * 9] * 3
+        setup = setup_white + empty_ranks + setup_black
+        self.board = pd.DataFrame(setup, index=range(self.DIM), columns=range(self.DIM))
+        # self.board.at[6, 4] = Pawn(color=Piece.colors['BLACK'])
+        # self.board.at[8, 4] = King(color=Piece.colors['BLACK'])
+        # self.board.at[7, 1] = Bishop(color=Piece.colors['BLACK'])
+        # self.board.at[7, 7] = Rook(color=Piece.colors['BLACK'])
+        # self.board.at[8, 0] = Lance(color=Piece.colors['BLACK'])
+        # self.board.at[2, 3] = Pawn(color=Piece.colors['WHITE'])
+        self.draw()
 
     def move(self, pos_from, pos_to):
         """
