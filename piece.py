@@ -93,6 +93,8 @@ class RangePiece(Piece):
     #     pass
 
     def move(self, pos_from, pos_to):
+        if not self.can_move(pos_from, pos_to):
+            raise ValueError(self._error_msg)
         diff = pos_to - pos_from
         n_rows, n_cols = diff
         if abs(n_rows) + abs(n_cols) == 0:

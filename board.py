@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 from piece import Piece
-from pieces import Pawn, King, Bishop, Rook
+from pieces import Pawn, King, Bishop, Rook, Lance
 
 
 class Board(object):
@@ -26,6 +26,7 @@ class Board(object):
         self.board.at[8, 4] = King(color=Piece.colors['BLACK'])
         self.board.at[7, 1] = Bishop(color=Piece.colors['BLACK'])
         self.board.at[7, 7] = Rook(color=Piece.colors['BLACK'])
+        self.board.at[8, 0] = Lance(color=Piece.colors['BLACK'])
         self.board.at[2, 3] = Pawn(color=Piece.colors['WHITE'])
 
     def move(self, pos_from, pos_to):

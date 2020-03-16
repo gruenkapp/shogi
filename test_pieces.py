@@ -4,7 +4,7 @@ import logging
 import numpy as np
 
 from board import Board
-from pieces import Pawn, King, Bishop,Rook
+from pieces import Pawn, King, Bishop, Rook, Lance
 
 logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
@@ -15,6 +15,28 @@ class TestPieces(unittest.TestCase):
         # Empty board with 1 Pawn in (6,4)
         self.board = Board()
 
+    def test_lance(self):
+        ## 1. Move across the board
+        init = np.array([8, 0])
+        targ = np.array([2, 0])
+        self.board.move(init, targ)
+        # Retrieve the element at (2, 0) and check whether it is a Bishop object
+        self.assertIsInstance(self.board.board.at[2, 0], Lance, msg="Lance not in position")
+
+        ## 2. Illegal move
+        init = np.array([2, 0])
+        targ = np.array([2, 3])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
+
+    def test_not_move(self):
+        init = np.array([7, 7])  # Rook
+        targ = np.array([7, 7])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
+
     def test_rook(self):
         ## 1. Move across the board
         init = np.array([7, 7])
@@ -22,6 +44,13 @@ class TestPieces(unittest.TestCase):
         self.board.move(init, targ)
         # Retrieve the element at (7, 2) and check whether it is a Bishop object
         self.assertIsInstance(self.board.board.at[7, 2], Rook, msg="Rook not in position")
+
+        ## 2. Illegal move
+        init = np.array([7, 2])
+        targ = np.array([6, 1])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
 
     def test_bishop(self):
         ## 1. Move across the board
@@ -38,7 +67,14 @@ class TestPieces(unittest.TestCase):
             # Tries to move to the invalid position
             self.board.move(init, targ)
 
-        ## 3. Kill Pawn
+        ## 3. Illegal move
+        init = np.array([0, 8])
+        targ = np.array([0, 7])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
+
+        ## 4. Kill Pawn
         # Bishop moves
         init = np.array([0, 8])
         targ = np.array([4, 4])
