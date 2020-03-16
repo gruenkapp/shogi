@@ -8,20 +8,28 @@ It is quite basic as of now:
 * You also have captured pieces at each side of the board.
 
 ```
+Turn 9: white
+From [row col]
+[1 0]
+To [row col]
+[4 0]
+Rv captured piece L^ color black on position [4 0]
+================ White (v) =====================
 Captured:
-P^
+P^, L^
      0    1    2    3    4    5    6    7    8
-0   Lv   Nv   Sv   Gv   Kv   Gv   Sv   Nv   Lv
-1        Rv                            R^
-2   Pv   Pv   Pv   Pv   Pv   Pv   Pv        Pv
-3
-4
-5
-6   P^   P^   P^   P^   P^   P^   P^        P^
-7        B^
-8   L^   N^   S^   G^   K^   G^   S^   N^   L^
+0        Nv   Sv   Gv   Kv   Gv   Sv   Nv   Lv
+1                                      Bv     
+2        Pv   Pv   Pv   Pv   Pv   Pv   Pv   Pv
+3                                             
+4   Rv                                        
+5             P^                            P^
+6        P^        P^   P^   P^   P^   P^     
+7        B^                            R^     
+8        N^   S^   G^   K^   G^   S^   N^   L^
 Captured:
-Pv, Pv, Bv
+Pv, Lv
+================ Black (^) =====================
 ```
 
 The white pieces are on the upper side and the black ones are on the lower side of the board.
