@@ -1,12 +1,12 @@
 # Test suite containing all the TestCases.
 
 from test_board import TestBoard
-from test_pawn2 import TestPawn
+from test_pieces import TestPieces
 
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(TestBoard)
-    suite.addTest(TestPawn)
+    suite.addTest(TestPieces)
     return suite
 
 if __name__ == '__main__':

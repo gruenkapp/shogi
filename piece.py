@@ -22,7 +22,6 @@ class Piece(ABC):
         else:
             raise ValueError("Pieces can only be these colors: " + ', '.join(self.colors.values()))
 
-
     @property
     @abstractmethod
     def _str_rep(self):
@@ -40,7 +39,7 @@ class Piece(ABC):
 
     def move(self, pos_from, pos_to):
         if np.any([np.array_equal(pos_to, pos) for pos in [pos_from + m for m in self.moves]]):
-            return 0
+            return [pos_to]
         else:
             raise ValueError(self.error_msg)
 

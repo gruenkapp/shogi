@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 from piece import Piece
-from pieces import Pawn, King
+from pieces import Pawn, King, Bishop
 
 
 class Board(object):
@@ -24,6 +24,7 @@ class Board(object):
         self.board = pd.DataFrame(self.EMPTY_CELL, index=range(self.DIM), columns=range(self.DIM))
         self.board.at[6, 4] = Pawn(color=Piece.colors['BLACK'])
         self.board.at[8, 4] = King(color=Piece.colors['BLACK'])
+        self.board.at[7, 1] = Bishop(color=Piece.colors['BLACK'])
         self.board.at[2, 3] = Pawn(color=Piece.colors['WHITE'])
 
     def move(self, pos_from, pos_to):
@@ -44,7 +45,7 @@ class Board(object):
         row1, col1 = pos_from
         row2, col2 = pos_to
 
-        if np.any(pos_to > self.DIM) or np.any(pos_to < 0):
+        if np.any(pos_to > self.DIM - 1) or np.any(pos_to < 0):
             raise ValueError("Out of the Board: the board's dimensions are " + str(self.DIM) + "x" + str(self.DIM) +
                              ". You cannot move a piece beyond the board's edge.")
 
@@ -61,9 +62,9 @@ class Board(object):
                               + " on position " + str(pos_to))
                 self.captured[piece_at_target.color] += [piece_at_target]
 
-        if piece.move(pos_from, pos_to) == 0:
-            self.board.at[row1, col1] = self.EMPTY_CELL
-            self.board.at[row2, col2] = piece
+        mv_range = piece.move(pos_from, pos_to)
+        self.board.at[row1, col1] = self.EMPTY_CELL
+        self.board.at[row2, col2] = piece
         self.draw()
 
     def draw(self):
