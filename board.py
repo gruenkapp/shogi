@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 from piece import Piece
-from pieces import Pawn, King, Bishop, Rook, Lance
+from pieces import Pawn, King, Bishop, Rook, Lance, Knight, GoldGeneral, SilverGeneral
 
 
 class Board(object):
@@ -25,13 +25,13 @@ class Board(object):
         setup_white = [
             [  # Rank 0
                     Lance(color=Piece.colors['WHITE']),
-                    self.EMPTY_CELL,
-                    self.EMPTY_CELL,
-                    self.EMPTY_CELL,
+                    Knight(color=Piece.colors['WHITE']),
+                    SilverGeneral(color=Piece.colors['WHITE']),
+                    GoldGeneral(color=Piece.colors['WHITE']),
                     King(color=Piece.colors['WHITE']),
-                    self.EMPTY_CELL,
-                    self.EMPTY_CELL,
-                    self.EMPTY_CELL,
+                    GoldGeneral(color=Piece.colors['WHITE']),
+                    SilverGeneral(color=Piece.colors['WHITE']),
+                    Knight(color=Piece.colors['WHITE']),
                     Lance(color=Piece.colors['WHITE'])
             ],
             [  # Rank 1
@@ -82,13 +82,13 @@ class Board(object):
             ],
             [  # Rank 8
                 Lance(color=Piece.colors['BLACK']),
-                self.EMPTY_CELL,
-                self.EMPTY_CELL,
-                self.EMPTY_CELL,
+                Knight(color=Piece.colors['BLACK']),
+                SilverGeneral(color=Piece.colors['BLACK']),
+                GoldGeneral(color=Piece.colors['BLACK']),
                 King(color=Piece.colors['BLACK']),
-                self.EMPTY_CELL,
-                self.EMPTY_CELL,
-                self.EMPTY_CELL,
+                GoldGeneral(color=Piece.colors['BLACK']),
+                SilverGeneral(color=Piece.colors['BLACK']),
+                Knight(color=Piece.colors['BLACK']),
                 Lance(color=Piece.colors['BLACK'])
             ]
         ]

@@ -87,10 +87,10 @@ class RangePiece(Piece):
     """
     def __init__(self, color):
         super().__init__(color)
-    #
-    # @abstractmethod
-    # def can_move(self, pos_from, pos_to):
-    #     pass
+
+    @abstractmethod
+    def can_move(self, pos_from, pos_to):
+        pass
 
     def move(self, pos_from, pos_to):
         if not self.can_move(pos_from, pos_to):
