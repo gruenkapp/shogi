@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 from piece import Piece
-from pieces import Pawn, King, Bishop
+from pieces import Pawn, King, Bishop, Rook
 
 
 class Board(object):
@@ -25,6 +25,7 @@ class Board(object):
         self.board.at[6, 4] = Pawn(color=Piece.colors['BLACK'])
         self.board.at[8, 4] = King(color=Piece.colors['BLACK'])
         self.board.at[7, 1] = Bishop(color=Piece.colors['BLACK'])
+        self.board.at[7, 7] = Rook(color=Piece.colors['BLACK'])
         self.board.at[2, 3] = Pawn(color=Piece.colors['WHITE'])
 
     def move(self, pos_from, pos_to):
@@ -63,6 +64,7 @@ class Board(object):
                 self.captured[piece_at_target.color] += [piece_at_target]
 
         mv_range = piece.move(pos_from, pos_to)
+        # TODO: mv_range to be used to make sure no piece is on the way
         self.board.at[row1, col1] = self.EMPTY_CELL
         self.board.at[row2, col2] = piece
         self.draw()

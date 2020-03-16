@@ -4,7 +4,7 @@ import logging
 import numpy as np
 
 from board import Board
-from pieces import Pawn, King, Bishop
+from pieces import Pawn, King, Bishop,Rook
 
 logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
@@ -14,6 +14,14 @@ class TestPieces(unittest.TestCase):
     def setUp(self):
         # Empty board with 1 Pawn in (6,4)
         self.board = Board()
+
+    def test_rook(self):
+        ## 1. Move across the board
+        init = np.array([7, 7])
+        targ = np.array([7, 2])
+        self.board.move(init, targ)
+        # Retrieve the element at (7, 2) and check whether it is a Bishop object
+        self.assertIsInstance(self.board.board.at[7, 2], Rook, msg="Rook not in position")
 
     def test_bishop(self):
         ## 1. Move across the board
@@ -61,7 +69,7 @@ class TestPieces(unittest.TestCase):
         self.board.move(init, targ)
         self.assertIsInstance(self.board.board.at[7, 3], King, msg="King doesn't seem to have killed Pawn")
     	# TODO: assert that Pawn is in black's captured list
-
+    #
     def test_piece_crash(self):
         init = np.array([8, 4])
         targ = np.array([7, 4])
