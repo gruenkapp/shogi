@@ -24,7 +24,8 @@ Captured:
 Pv, Pv, Bv
 ```
 
-
+The white pieces are on the upper side and the black ones are on the lower side of the board.
+The blacks always start the game. See the example in this repo's shogi.py
 
 # Installing
 Clone the repo and then go to its root directory:
