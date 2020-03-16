@@ -16,12 +16,42 @@ class TestPieces(unittest.TestCase):
         self.board = Board()
 
     def test_lance(self):
-        ## 1. Move across the board
+        ## 1. Try to jump over other pieces
         init = np.array([8, 0])
         targ = np.array([2, 0])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+             # Tries to move to the invalid position
+             self.board.move(init, targ)
+
+        ## 2. Move across the board
+        # First, get Pawn out of the way
+        n = 2
+        while not n == 6:
+            init = np.array([n, 8])
+            n += 1
+            targ = np.array([n, 8])
+            print("From [row col]")
+            print(init)
+            print("To [row col]")
+            print(targ)
+            self.board.move(init, targ)
+        # White Pawn kills Black Pawn
+        init = np.array([8, 8])
+        targ = np.array([6, 8])
+        print("From [row col]")
+        print(init)
+        print("To [row col]")
+        print(targ)
+        self.board.move(init, targ)  # Kill white Pawn
+        init = np.array([6, 8])
+        targ = np.array([2, 8])
+        print("From [row col]")
+        print(init)
+        print("To [row col]")
+        print(targ)
         self.board.move(init, targ)
-        # Retrieve the element at (2, 0) and check whether it is a Bishop object
-        self.assertIsInstance(self.board.board.at[2, 0], Lance, msg="Lance not in position")
+        # Retrieve the element at (2, 8) and check whether it is a Bishop object
+        self.assertIsInstance(self.board.board.at[2, 8], Lance, msg="Lance not in position")
 
         ## 2. Illegal move
         init = np.array([2, 0])
@@ -38,58 +68,81 @@ class TestPieces(unittest.TestCase):
             self.board.move(init, targ)
 
     def test_rook(self):
-        ## 1. Move across the board
+        ## 1. Try to jump
         init = np.array([7, 7])
         targ = np.array([2, 7])
-        self.board.move(init, targ)
-        # Retrieve the element at (7, 2) and check whether it is a Bishop object
-        self.assertIsInstance(self.board.board.at[7, 2], Rook, msg="Rook not in position")
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
 
-        ## 2. Illegal move
-        init = np.array([2, 7])
+        ## 2. Move across the board
+        # First, get Pawn out of the way
+        n = 2
+        while not n == 6:
+            init = np.array([n, 7])
+            n += 1
+            targ = np.array([n, 7])
+            print("From [row col]")
+            print(init)
+            print("To [row col]")
+            print(targ)
+            self.board.move(init, targ)
+        # White Pawn kills Black Pawn
+        init = np.array([7, 7])
+        targ = np.array([6, 7])
+        self.board.move(init, targ)  # Kill Pawn
+        init = np.array([6, 7])
+        targ = np.array([1, 7])
+        self.board.move(init, targ)  # Kill other Rook
+        # Retrieve the element at (1, 7) and check whether it is a Rook object
+        self.assertIsInstance(self.board.board.at[1, 7], Rook, msg="Rook not in position")
+
+        ## 3. Move from position where there is no one
+        init = np.array([7, 7])
+        targ = np.array([7, 3])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
+
+        ## 4. Illegal move
+        init = np.array([1, 7])
         targ = np.array([2, 6])
         with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
             # Tries to move to the invalid position
             self.board.move(init, targ)
 
     def test_bishop(self):
-        ## 1. Move across the board
+        ## 1. Move over other pieces
         init = np.array([7, 1])
         targ = np.array([0, 8])
-        self.board.move(init, targ)
-        # Retrieve the element at (0, 8) and check whether it is a Bishop object
-        self.assertIsInstance(self.board.board.at[0, 8], Bishop, msg="Bishop not in position")
-
-        ## 2. Move beyond the board's edge
-        init = np.array([0, 8])
-        targ = np.array([0, 9])
         with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
             # Tries to move to the invalid position
             self.board.move(init, targ)
+        init = np.array([6, 2])
+        targ = np.array([5, 2])
+        self.board.move(init, targ)
+        init = np.array([7, 1])
+        targ = np.array([0, 8])
+        with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
+            # Tries to move to the invalid position
+            self.board.move(init, targ)
+
+        ## 1. Move across the board
+        init = np.array([7, 1])
+        targ = np.array([2, 6])
+        self.board.move(init, targ)
+        # Retrieve the element at (2, 6) and check whether it is a Bishop object
+        self.assertIsInstance(self.board.board.at[2, 6], Bishop, msg="Bishop not in position")
 
         ## 3. Illegal move
-        init = np.array([0, 8])
-        targ = np.array([0, 7])
+        init = np.array([2, 6])
+        targ = np.array([3, 5])
+        self.board.move(init, targ)
+        init = np.array([3, 5])
+        targ = np.array([3, 4])
         with self.assertRaises(ValueError, msg="ValueError exception not launched") as cm:
             # Tries to move to the invalid position
             self.board.move(init, targ)
-
-        ## 4. Kill Pawn
-        # Bishop moves
-        init = np.array([0, 8])
-        targ = np.array([4, 4])
-        self.board.move(init, targ)
-        # Pawn moves
-        init = np.array([2, 3])
-        targ = np.array([3, 3])
-        self.board.move(init, targ)
-        # Bishop kills
-        init = np.array([4, 4])
-        targ = np.array([3, 3])
-        self.board.move(init, targ)
-        # Retrieve the element at (0, 8) and check whether it is a Bishop object
-        self.assertIsInstance(self.board.board.at[3, 3], Bishop, msg="Bishop doesn't seem to have killed Pawn")
-        # TODO: assert that Pawn is in black's captured list
 
     def test_capture_piece(self):
         n_white = 2
