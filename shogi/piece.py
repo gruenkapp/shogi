@@ -36,14 +36,21 @@ class Piece(ABC):
     def can_move(self, pos_from, pos_to):
         """
         Assuming that this piece is in pos_from, would it be legal for it to move to pos_to?
-        :param pos_from: initial position
-        :param pos_to: target position
+        :param pos_from: (a numpy array of length 2) Initial position
+        :param pos_to: (a numpy array of length 2) Target position
         :return: True if movement is legal, False otherwise.
         """
         pass
 
     @abstractmethod
     def move(self, pos_from, pos_to):
+        """
+        This method is used by the board to ask the piece if it can make a move.
+        It will throw an exception if the move is not in the nature of the piece.
+        :param pos_from: a numpy array of length 2) Initial position
+        :param pos_to: (a numpy array of length 2) Target position
+        :return: (a numpy array of length n) the range of sqares that the piece will go across to make this move.
+        """
         pass        
         
     def __str__(self):

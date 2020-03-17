@@ -114,8 +114,8 @@ class Board(object):
         - Out of the board's boundaries: You tried to move a piece out of the board's boundaries.
         - No piece to move: The initial position that you passed contains no piece.
         - Illegal move: The piece you are trying to move does not allow the move you are specifying.
-        :param pos_from: initial position. This position must contain a piece.
-        :param pos_to: target position. This position must be within the board and it must be the result of a movement
+        :param pos_from: (a numpy array of length 2) Initial position. This position must contain a piece.
+        :param pos_to: (a numpy array of length 2) Target position. This position must be within the board and it must be the result of a movement
         that is legal for the piece that you are moving.
         :return: nothing. If everything was ok, it will draw its new status. Otherwise it will throw an error.
         """
