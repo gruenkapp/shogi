@@ -1,4 +1,4 @@
-# shogi
+# Shogi
 A program that simulates two people playing Shogi.
 
 It is quite basic as of now:
@@ -33,7 +33,11 @@ Pv, Lv
 ```
 
 The white pieces are on the upper side and the black ones are on the lower side of the board.
-The blacks always start the game. See the example in this repo's shogi.py
+The blacks always start the game. 
+
+The moves are defined by a starting position and an end position. Both positions must be squares of the board. They must be [numpy](https://numpy.org/) vectors of (x, y). The initial position must contain a piece and the end position must be the result of a valid move for that kind of piece.
+
+See the example in this repo's [shogi.py](shogi.py) (also see section [Usage](#usage) below).
 
 # Installing
 Clone the repo and then go to its root directory:
@@ -55,8 +59,37 @@ python shogi.py
 
 Enjoy!
 
-Note: you can use shogi.py as an example and develop your own games.
+Note: you can use [shogi.py](shogi.py) as an example and develop your own games.
 You can even create a program that reads the moves from command line and avoids crash when illegal moves are made, giving the players a second chance.
+
+# Usage
+As stated above, you can use the [shogi.py](shogi.py) file as a how-to.
+
+It is also explained here for convenience:
+1. Once you have installed the package, import the Board class:
+```py
+from shogi import Board
+```
+And create a new board:
+```py
+board = Board()
+```
+
+2. Define a move:
+You'll need to import numpy:
+
+```py
+import numpy as np
+
+init = np.array([6, 4])
+targ = np.array([5, 4])
+```
+
+3. Make the move:
+```py
+board.move(init, targ)
+```
+Note: you should start by a black piece. Black pieces are at the bottom of the board (ranks 6 to 8) and have symbol `^` next to them.
 
 # Contributions
 These functionalities are not yet developed:
